@@ -1,0 +1,202 @@
+html {
+  width: 100%;
+  height: 100%;
+}
+body {
+  background: #b3d7cd;
+}
+
+input[type='radio'] {
+  display: none;
+}
+
+#start:checked ~ .second-hand {
+  animation-play-state: running;
+}
+
+#stop:checked ~ .second-hand {
+  animation-play-state: paused;
+}
+
+#reset:checked ~ .second-hand {
+  animation: none;
+}
+
+.clock1 {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  background: #f7f3d9;
+  border: 20px solid #353535;
+  border-radius: 50%;
+  margin: 100px auto;
+}
+
+.btn {
+  position: absolute;
+  top: -45px;
+  left: 50%;
+  margin-left: -14px;
+  width: 28px;
+  height: 26px;
+  background: #5a5d5a;
+  z-index: 19;
+  transform-origin: 50% 195px;
+
+  &.right {
+    top: -35px;
+    height: 16px;
+    transform-origin: 50% 185px;
+    transform: rotate(45deg);
+  }
+
+  &.left {
+    top: -35px;
+    height: 16px;
+    transform-origin: 50% 185px;
+    transform: rotate(-45deg);
+  }
+
+  &.red {
+    top: -74px;
+    margin-left: -22px;
+    width: 44px;
+    height: 36px;
+    background: #b45a4d;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all .1s;
+    z-index: 20;
+
+    &:active {
+      transform: translateY(10px);
+    }
+  }
+
+  &.blue,&.black {
+    top: -60px;
+    margin-left: -21px;
+    width: 42px;
+    height: 28px;
+    background: #259399;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all .1s;
+    transform-origin: 50% 210px;
+
+    &:active {
+      transform: rotate(45deg) translateY(10px);
+    }
+  }
+
+  &.black {
+    background: #353535;
+
+    &:active {
+      transform: rotate(-45deg) translateY(10px);
+    }
+  }
+}
+
+.ring {
+  display: block;
+  position: absolute;
+  top: -108px;
+  left: 50%;
+  margin-left: -44px;
+  width: 88px;
+  height: 88px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  border: 6px solid #5a5d5a;
+}
+
+.axis {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  width: 20px;
+  height: 20px;
+  background: #353535;
+  border-radius: 50%;
+  z-index: 10;
+
+  &.tiny {
+    width: 10px;
+    height: 10px;
+    background: #f7f3d9;
+    z-index: 11;
+  }
+}
+
+.second-hand {
+  display: block;
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  margin-left: -3px;
+  width: 6px;
+  height: 160px;
+  background: #b45a4d;
+  border-radius: 3px;
+  z-index: 2;
+  transform-origin: center 130px;
+  transform: rotate(0);
+  animation-name: secunda;
+  animation-duration: 60s;
+  animation-delay: 0;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-play-state: paused;
+}
+
+.clock-face {
+  display: block;
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  margin-left: -2px;
+  width: 4px;
+  height: 18px;
+  background: #353535;
+  border-radius: 2px;
+  z-index: 1;
+  transform-origin: 50% 140px;
+
+  &.seconds {
+    width: 2px;
+    height: 8px;
+  }
+
+  @for $i from 1 through 59 {
+    &.second-#{$i} {
+      transform: rotate(#{6 * $i}deg);
+    }
+  }
+
+  &.twelve { transform: rotate(0deg); }
+  &.one { transform: rotate(30deg); }
+  &.two { transform: rotate(60deg); }
+  &.three { transform: rotate(90deg); }
+  &.four { transform: rotate(120deg); }
+  &.five { transform: rotate(150deg); }
+  &.six { transform: rotate(180deg); }
+  &.seven { transform: rotate(210deg); }
+  &.eight { transform: rotate(240deg); }
+  &.nine { transform: rotate(270deg); }
+  &.ten { transform: rotate(300deg); }
+  &.eleven { transform: rotate(330deg); }
+}
+
+@keyframes secunda {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
