@@ -1,5 +1,5 @@
 import React from "react";
-import "./style.scss";
+import "./css/style.css"
 import Stopwatch from "./Stopwatch";
 
 const App: React.FC = () => {
